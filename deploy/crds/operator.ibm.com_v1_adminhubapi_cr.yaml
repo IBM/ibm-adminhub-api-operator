@@ -1,0 +1,7 @@
+apiVersion: operator.ibm.com/v1
+kind: AdminHubApi
+metadata:
+  name: example-adminhubapi
+spec:
+  # Add fields here
+  size: 3

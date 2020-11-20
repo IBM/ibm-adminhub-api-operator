@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ibm-adminhub-api-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: ibm-adminhub-api-operator
+  template:
+    metadata:
+      labels:
+        name: ibm-adminhub-api-operator
+    spec:
+      serviceAccountName: ibm-adminhub-api-operator
+      containers:
+        - name: ibm-adminhub-api-operator
+          # Replace this with the built image name
+          image: REPLACE_IMAGE
+          command:
+          - ibm-adminhub-api-operator
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "ibm-adminhub-api-operator"
